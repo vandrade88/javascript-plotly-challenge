@@ -9,6 +9,13 @@
 
 // display individual's demographic data
 // id="sample-metadata"
+function buildMetaData(sampleNumber) {
+    d3.json("samples.json").then((data) => {
+        var metadata = data.metadata;
+        var sampleSelected = metadata.filter(item => item.id === sampleNumber);
+
+    })
+}
 
 // display key-value pairs from metadata JSON object
 
