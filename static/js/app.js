@@ -83,7 +83,7 @@ function buildGaugeChart(sampleNumber) {
         var data = [
             {
               domain: { x: [0, 1], y: [0, 1] },
-              value: parseFloat(wash_freq),
+              value: parseInt(wash_freq),
               type: "indicator",
               mode: "gauge+number",
               title: { text: `${boldString}<br>Scrubs per Week`, font: { size: 16 } },
