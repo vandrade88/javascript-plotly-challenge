@@ -1,6 +1,6 @@
 // create horizontal bar chart with dropdown menu
 function buildBarChart(sampleNumber) {
-    d3.json("samples.json").then((data) => {
+    d3.json("./samples.json").then((data) => {
         var samples = data.samples;
         var sampleSelected = samples.filter(item => item.id == sampleNumber);
         sampleSelected = sampleSelected[0];
@@ -24,7 +24,7 @@ function buildBarChart(sampleNumber) {
 
 // create bubble chart that display each sample
 function buildBubbleChart(sampleNumber) {
-    d3.json("samples.json").then((data) => {
+    d3.json("./samples.json").then((data) => {
         var samples = data.samples;
         var sampleSelected = samples.filter(item => item.id == sampleNumber);
         sampleSelected = sampleSelected[0];
@@ -57,7 +57,7 @@ function buildBubbleChart(sampleNumber) {
 
 // display individual's demographic data
 function buildMetaData(sampleNumber) {
-    d3.json("samples.json").then((data) => {
+    d3.json("./samples.json").then((data) => {
         var metadata = data.metadata;
         var sampleSelected = metadata.filter(item => item.id == sampleNumber);
         sampleSelected = sampleSelected[0]; 
@@ -73,7 +73,7 @@ function buildMetaData(sampleNumber) {
 // init function
 function init() {
     // populate the drop down menu (id = selDataset) with ID number options inside drop down
-        d3.json("samples.json").then((data) => {
+        d3.json("./samples.json").then((data) => {
             var dropdownMenu = d3.select("#selDataset");
             var idNumber = data.names;
             idNumber.forEach(function(item) {

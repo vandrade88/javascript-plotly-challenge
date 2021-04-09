@@ -1,23 +1,6 @@
-// init function
-function init() {
-    var data = [{
-      values: us,
-      labels: labels,
-      type: 'pie'
-    }];
-
-    var layout = {
-        height: 600,
-        width: 800
-    };
-  
-    Plotly.newPlot("pie", data, layout);
-};
-
-
 // create gauge chart
 function buildGaugeChart(sampleNumber) {
-    d3.json("samples.json").then((data) => {
+    d3.json("./samples.json").then((data) => {
         var metadata = data.metadata;
         var sampleSelected = metadata.filter(item => item.id == sampleNumber);
         sampleSelected = sampleSelected[0];
@@ -25,11 +8,13 @@ function buildGaugeChart(sampleNumber) {
 
         var data = [
             {
+              domain: { x: [0, 1], y: [0, 1] },
+              value: wash_freq,
               type: "indicator",
-              mode: "gauge",
+              mode: "gauge+number+delta",
               title: { text: "Belly Button Washing Frequency<br>Scrubs per Week", font: { size: 16 } },
               gauge: {
-                axis: { range: [null, 9]},
+                axis: { range: [0, 9]},
                 steps: [
                   { range: [0, 1], color: 'rgba(248,243,236,255)'},
                   { range: [1, 2], color: 'rgba(244,241,228,255)'},
