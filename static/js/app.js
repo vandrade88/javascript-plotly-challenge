@@ -19,7 +19,8 @@ function buildBarChart(sampleNumber) {
         var data = [barTrace];
 
         Plotly.newPlot("bar", data);
-})};
+    })
+};
 
 // create bubble chart that display each sample
 function buildBubbleChart(sampleNumber) {
@@ -51,21 +52,22 @@ function buildBubbleChart(sampleNumber) {
         };
 
         Plotly.newPlot("bubble", data, layout);
-})};
-
+    })
+};
 
 // display individual's demographic data
 function buildMetaData(sampleNumber) {
     d3.json("samples.json").then((data) => {
         var metadata = data.metadata;
-        var sampleSelected = metadata.filter(item => item.id === sampleNumber);
+        var sampleSelected = metadata.filter(item => item.id == sampleNumber);
         sampleSelected = sampleSelected[0]; 
         // display key-value pairs from metadata JSON object
         var metadata_object = d3.select("#sample-metadata");
         metadata_object.html("");
         Object.entries(sampleSelected).forEach(([key, value]) => {
             metadata_object.append("h6").text(`${key.toUpperCase()}: ${value}`);
-    })})
+        })
+    })
 };
 
 // init function
@@ -86,19 +88,15 @@ function init() {
     })
 };
     
-    // create event handler call optionChanged when new drop down item is selected
-    d3.selectAll("#selDataset").on("change", optionChanged);
-    
-    // optionChanged: call updated charts on the new ID number selected from drop down
-    function optionChanged(sampleNumber) {
-        var dropdownMenu = d3.select("#selDataset");
-        var selectedOption = dropdownMenu.property("value");
-        buildBarChart(sampleNumber);
-        buildBubbleChart(sampleNumber);
-        buildMetaData(sampleNumber);
-    };
-    
-    // update all plots when dropdown option is selected
-    // onchange="optionChanged(this.value)    
+// create event handler call optionChanged when new drop down item is selected
+d3.selectAll("#selDataset").on("change", optionChanged);
+// optionChanged: update all plots when dropdown option is selected
+function optionChanged(sampleNumber) {
+    var dropdownMenu = d3.select("#selDataset");
+    var selectedOption = dropdownMenu.property("value");
+    buildBarChart(sampleNumber);
+    buildBubbleChart(sampleNumber);
+    buildMetaData(sampleNumber);
+}; 
 
 init();
