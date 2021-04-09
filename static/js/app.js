@@ -133,7 +133,7 @@ function init() {
         buildBarChart(idNumber[0]);
         buildBubbleChart(idNumber[0]);
         buildMetaData(idNumber[0]);
-        buildGaugeChart(idNumber[0]);
+        // buildGaugeChart(idNumber[0]);
     })
 };
     
@@ -146,7 +146,7 @@ function optionChanged(sampleNumber) {
     buildBarChart(selectedOption);
     buildBubbleChart(selectedOption);
     buildMetaData(selectedOption);
-    buildGaugeChart(selectedOption);
+    // buildGaugeChart(selectedOption);
 }; 
 
 init();
