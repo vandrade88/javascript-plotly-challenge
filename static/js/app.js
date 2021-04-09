@@ -81,7 +81,7 @@ function init() {
                 idList.attr("value",item);
                 idList.text(item);
         })
-        // call bar chart, bubble chart and meta data on the first value in samples.json (940) DONE
+        // call bar chart, bubble chart and meta data on the first value in samples.json
         buildBarChart(idNumber[0]);
         buildBubbleChart(idNumber[0]);
         buildMetaData(idNumber[0]);
@@ -94,9 +94,9 @@ d3.selectAll("#selDataset").on("change", optionChanged);
 function optionChanged(sampleNumber) {
     var dropdownMenu = d3.select("#selDataset");
     var selectedOption = dropdownMenu.property("value");
-    buildBarChart(sampleNumber);
-    buildBubbleChart(sampleNumber);
-    buildMetaData(sampleNumber);
+    buildBarChart(selectedOption);
+    buildBubbleChart(selectedOption);
+    buildMetaData(selectedOption);
 }; 
 
 init();
