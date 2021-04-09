@@ -77,6 +77,8 @@ function buildGaugeChart(sampleNumber) {
         var sampleSelected = metadata.filter(item => item.id == sampleNumber);
         sampleSelected = sampleSelected[0];
         var wash_freq = sampleSelected.wfreq;
+        var titleString = "Belly Button Washing Frequency";
+        var boldString = titleString.bold();
 
         var data = [
             {
@@ -84,7 +86,7 @@ function buildGaugeChart(sampleNumber) {
               value: parseFloat(wash_freq),
               type: "indicator",
               mode: "gauge+number",
-              title: { text: "Belly Button Washing Frequency<br>Scrubs per Week", font: { size: 16 } },
+              title: { text: `${boldString}<br>Scrubs per Week"`, font: { size: 16 } },
               gauge: {
                 axis: { range: [0, 9]},
                 steps: [
@@ -133,7 +135,7 @@ function init() {
         buildBarChart(idNumber[0]);
         buildBubbleChart(idNumber[0]);
         buildMetaData(idNumber[0]);
-        // buildGaugeChart(idNumber[0]);
+        buildGaugeChart(idNumber[0]);
     })
 };
     
@@ -146,7 +148,7 @@ function optionChanged(sampleNumber) {
     buildBarChart(selectedOption);
     buildBubbleChart(selectedOption);
     buildMetaData(selectedOption);
-    // buildGaugeChart(selectedOption);
+    buildGaugeChart(selectedOption);
 }; 
 
 init();
