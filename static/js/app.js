@@ -1,18 +1,54 @@
 // init function
 function init() {
-    var data = [{
-      values: us,
-      labels: labels,
-      type: 'pie'
-    }];
+// populate the drop down menu (id = selDataset) with ID number options inside drop down
+    d3.json("samples.json").then((data) => {
+        var dropdownMenu = d3.select("#selDataset");
+        var idNumber = data.names;
+        idNumber.forEach(function(item) {
+            var idList = dropdownMenu.append("option");
+            idList.attr("value",item);
+            idList.text(item);
+    })
+});
 
-    var layout = {
-        height: 600,
-        width: 800
-    };
+// On change to the DOM, call getData()
+d3.selectAll("#selDataset").on("change", getData);
   
-    Plotly.newPlot("pie", data, layout);
+// This function is called when a dropdown menu item is selected
+function getData() {
+    // Use D3 to select the dropdown menu
+    var dropdownMenu = d3.select("#selDataset");
+    // Assign the value of the dropdown menu option to a variable
+    var dataset = dropdownMenu.property("value");
+    // Initialize an empty array for the country's data
+    var data = [];
+  
+    if (dataset == 'us') {
+        data = us;
+    }
+  
+    else if (dataset == 'uk') {
+        data = uk;
+    }
+
+    else if (dataset == 'canada') {
+        data = canada;
+    }
+  
+    // Call function to update the chart. The function of updatePlotly is below
+    updatePlotly(data);
+}
 };
+
+// update all plots when dropdown option is selected
+// onchange="optionChanged(this.value)
+
+// init function (default data):
+// populate the drop down menu (id = selDataset)
+// loop through data and append an option for each sample name
+// call buildBarChart and buildMetadata on the first value in samples.json (940)
+
+// optionChanged: call buildBarChart and buildMetadata on the new sample
 
 
 // create horizontal bar chart with dropdown menu
@@ -93,15 +129,34 @@ function buildMetaData(sampleNumber) {
 buildMetaData(940);
 
 
-// update all plots when dropdown option is selected
-// onchange="optionChanged(this.value)
 
-// add options for dropdown
-// id="selDataset"
+// // i think this is how we call to update each plot upon new change, however, we might need to create the function for updating on change
+// // Update the restyled plot's values
+// function updatePlotly(newdata) {
+//     Plotly.restyle("pie", "values", [newdata]);
+// } // "values" which is the x for a pie chart
+//    // [newdata] is the new data
 
-// init function (default data):
-// populate the drop down menu (id = selDataset)
-// loop through data and append an option for each sample name
-// call buildBarChart and buildMetadata on the first value in samples.json (940)
 
-// optionChanged: call buildBarChar and buildMetadata on the new sample
+// // Use D3 to create an event handler (to detect when something is chosen)
+// d3.selectAll("body").on("change", updatePage);
+// // on function takes 2 things: 1) the action that is triggering it AND
+// // 2) is the function which is the thing to do when the event occurs 
+
+
+// // since the below is the action we want it to do on change (whenever someone clicks our dropdown
+// // menu), then we wrap it in a function so we can use it in event handler above
+// function updatePage() {
+//   // Use D3 to select the dropdown menu
+//   var dropdownMenu = d3.selectAll("#select_tag").node();
+//   // Assign the dropdown menu item ID to a variable
+//   var dropdownMenuID = dropdownMenu.id;
+//   // Assign the dropdown menu option to a variable
+//   var selectedOption = dropdownMenu.value;
+
+//   console.log(dropdownMenuID);
+//   console.log(selectedOption);
+// }
+
+// init (default plot) is called down below at the end:
+init();
