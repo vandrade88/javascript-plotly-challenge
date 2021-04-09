@@ -86,7 +86,7 @@ function buildGaugeChart(sampleNumber) {
               value: parseFloat(wash_freq),
               type: "indicator",
               mode: "gauge+number",
-              title: { text: `${boldString}<br>Scrubs per Week"`, font: { size: 16 } },
+              title: { text: `${boldString}<br>Scrubs per Week`, font: { size: 16 } },
               gauge: {
                 axis: { range: [0, 9]},
                 steps: [
